@@ -2,6 +2,14 @@ import pandas as pd
 import numpy as np
 
 class tslabel_weak():
+    """
+        O módulo recebe como parâmetros:
+            txt = dataset com dados textuais
+            col_txt = coluna do dataset textual, contendo os textos
+            serie = dataset com dados numericos
+            pct = porcentagem para cálculo da diferença de um dia para o outro
+            col = coluna com dados númericos (preços)
+    """
     def __init__(self,
                 txt,
                 col_txt,
