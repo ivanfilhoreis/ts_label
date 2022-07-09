@@ -60,9 +60,9 @@ class tslabel_weak():
         
         for p in per:
             if p >= 0:
-                df.loc[df['per_diff'] > p, 'class'] = 'pos'
+                df.loc[df['per_diff'] > p, 'class'] = '1'
             elif p <= 0:
-                df.loc[df['per_diff'] < p, 'class'] = 'neg'
+                df.loc[df['per_diff'] < p, 'class'] = '0'
         
         print("Number of Class:\n",df['class'].value_counts())
         
