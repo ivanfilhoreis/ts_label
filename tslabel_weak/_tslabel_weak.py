@@ -56,13 +56,13 @@ class tslabel_weak():
 
         df = pd.merge(df_t, df_p['per_diff'], left_index=True, right_index=True)
         df['per_diff'] = df['per_diff'] * 100
-        df['class'] = ''
+        df['class'] = 'neu'
         
         for p in per:
             if p >= 0:
-                df.loc[df['per_diff'] > p, 'class'] = '1'
+                df.loc[df['per_diff'] > p, 'class'] = 'pos'
             elif p <= 0:
-                df.loc[df['per_diff'] < p, 'class'] = '0'
+                df.loc[df['per_diff'] < p, 'class'] = 'neg'
         
         print("Number of Class:\n",df['class'].value_counts())
         
