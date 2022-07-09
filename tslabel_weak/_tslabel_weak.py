@@ -56,7 +56,7 @@ class tslabel_weak():
 
         df = pd.merge(df_t, df_p['per_diff'], left_index=True, right_index=True)
         df['per_diff'] = df['per_diff'] * 100
-        df['class'] = 'neu'
+        df['class'] = ''
         
         for p in per:
             if p >= 0:
