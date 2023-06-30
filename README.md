@@ -1,47 +1,62 @@
-# ts_labels
-Uso de dados de séries temporais para rotular documentos de textos.
+# Method to label texts using time series.
 
-Essa implementação faz a união de dados textuais e séries temporais por meio de suas datas. Calcula a diferença intra-dia da série temporal e atribui o rótulo conforme a variação.
+This repository contains code and resources for performing weak supervision using function labeling to generate text from time series features. The approach utilizes intraday oscillation time series data to label text data.
 
-# 1. Instalação
-A instalação é feita da seguinte forma:
+## Introduction
 
-```
-!pip install git+https://github.com/ivanfilhoreis/ts_labels.git -q
+In many applications, obtaining labeled text data for training machine learning models can be a challenging and time-consuming task. Weak supervision techniques provide an alternative approach to generating labeled data by leveraging auxiliary information. In this project, we focus on generating text labels from time series features using intraday oscillation data.
+
+## Requirements
+
+To run the code in this repository, you will need the following:
+
+- Python (version 3.7 or above)
+- NumPy
+- Pandas
+
+## Getting Started
+
+Clone the repository:
+
+```python
+!pip install git+https://github.com/ivanfilhoreis/ts_label.git -q
 !pip install pandas --upgrade
 
 ```
 
-# 2. Uso
-Primeiro passo é a formatação das datas para um padrão igual:
+## Usage
 
-```
+This step will read the data for labeling.
+
+```python
 from tslabel_weak import tslabel_weak as ts
 import pandas as pd
 
-#dados da série temporal
-df = pd.read_excel('test_dataset\Cepea_milho.xls')
-df.set_index('date', inplace=True)
+# time series data
+ts = pd.read_excel('dataset\Cepea_milho.xls')
+ts.set_index('date', inplace=True)
 
-#dados textuais
-df_tx = pd.read_excel('test_dataset\Scraping_Cepea_En_Noticias.xlsx', index_col='Date')
+# textual data
+df_tx = pd.read_excel('dataset\Scraping_Cepea_En_Noticias.xlsx', index_col='Date')
 df_tx.index = pd.to_datetime(df_tx.index)
 ```
 
-Os parêmetros do tslabel_weak são:
+This step will generate text labels for the given time series data using the trained model.
 
-    txt = dataset com dados textuais
-    col_txt = coluna do dataset contendo os textos
-    serie = dataset com dados numericos
-    pct = porcentagem para cálculo da diferença intra-dia
-    col = coluna com dados númericos
-    
-Assim, para realizar a rotulagem chama a função da seguinte forma:
+```python
+txt_lb = ts (txt=df_tx, col_txt='text', serie=ts, col='real', pct= 0.03, )
 
 ```
-teste = ts(txt= df_tx, col_txt='Text_Headline', serie= df, pct= 0.03, col='real')
-```
+
+The parameters are:
+
+- txt     = dataset with texts.
+- col_txt = column of dataset with texts.
+- serie   = prices series
+- col     = column with prices series
+- pct     = Threshold in percentage to define the label
 
 
+## Contributing
 
-
+Contributions to this project are welcome. If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
